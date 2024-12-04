@@ -123,4 +123,7 @@ def simplex():
                 print(bvColumn[row], " = ", tableau[row, -1])
                 print(f"row {row + 1}: ", list(tableau[row]))
 simplex()
+
+# test, test...
+# please help I am trapped
             
