@@ -124,6 +124,4 @@ def simplex():
                 print(f"row {row + 1}: ", list(tableau[row]))
 simplex()
 
-# test, test...
-# please help I am trapped
             
