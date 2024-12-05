@@ -5,26 +5,23 @@ import numpy as np
 
 def simplex():
     # the objective function
-    objFunc = -np.array([10, 9, 8, 6, 5, 7]) #-np.array(eval(input("What are the coefficients of x in the objective function? Format as [1, 2, 3...]\n*They all should be positive\n")))
+    objFunc = -np.array([20, 10, 50, 18, 21, 5, 4]) #-np.array(eval(input("What are the coefficients of x in the objective function? Format as [1, 2, 3...]\n*They all should be positive\n")))
+    
     # constraint matrix
     numVariables = objFunc.size
-    numConstraints = 12 #int(input("How many constraints are there?\n"))
+    numConstraints = 8 #int(input("How many constraints are there?\n"))
     A = np.zeros((numConstraints, numVariables))
     #for i in range(numConstraints):
     #    A[i] = np.array(eval(input(f"What are the coefficients of x in row {i + 1}? Format as [1, 2, 3...]\n")))
-    A[0] = [112, 74, 341, 128, 95, 32]
-    A[1] = [22.5, 6.2, 22, 4.7, 8.8, 0.7]
-    A[2] = [0, 0.1, 62, 12, 4.8, 4.9]
-    A[3] = [1.9, 5, 1.4, 9, 4.4, 0.3]
-    A[4] = [0, 0, -15.5, -9.8, 0, -2]
-    A[5] = [66, 65, 5, 4.5, 34, 1]
-    # these rows are for minimum calories, fat, carbs, sodium, and protein rather than just one more than the other for macros
-    A[6] = [-22.5, -6.2, -22, -4.7, -8.8, -0.7]
-    A[7] = [-112, -74, -341, -138, -95, -32]
-    A[8] = [0, -0.1, -62, -12, -4.8, -4.9]
-    A[9] = [-1.9, -5, -1.4, -9, -4.4, -0.3]
-    A[10] = [-66, -65, -5, -4.5, -34, -1]
-    A[11] = [73, 411, 0, 0, 17, 0]
+    A[0] = [112, 74, 341, 128, 95, 32, 45]
+    A[1] = [22.5, 6.2, 22, 4.7, 8.8, 0.7, 0.8]
+    A[2] = [0, 0.1, 62, 12, 4.8, 4.9, 8.1]
+    A[3] = [1.9, 5, 1.4, 9, 4.4, 0.3, 0.4]
+    A[4] = [0, 0, 15.5, 9.8, 0, 2, 0]
+    A[5] = [66, 65, 5, 4.5, 34, 1, 0]
+    #A[6] = [73, 411, 0, 0, 17, 0]
+    A[6] = [28.9, 7.9, -33.8, -6, 6.5, -4, -7.1]
+    A[7] = [-17.4, 7.3, -18.2, 19.6, 3.1, 0.1, 0.3]
 
     # slack identity
     slack = np.eye(numConstraints)
@@ -34,7 +31,7 @@ def simplex():
     zColumn = np.vstack(np.hstack([[1], np.zeros(numConstraints)]))
 
     # RHS column
-    rhsColumn = np.vstack([0, 3646, 319, 456, 101, -25, 2300, -273, -3146, -410, -81, -500, 300]) #np.vstack(np.hstack([[0], eval(input("Going from top to bottom, what are the values of the right hand side? Format as [1, 2, 3...]\n*Excluding the objective function\n"))]))
+    rhsColumn = np.vstack([0, 3646, 319, 456, 101, 30, 2300, 0, 0]) #np.vstack(np.hstack([[0], eval(input("Going from top to bottom, what are the values of the right hand side? Format as [1, 2, 3...]\n*Excluding the objective function\n"))]))
 
     # RT column
     rtColumn = np.vstack(np.zeros(numConstraints + 1))
