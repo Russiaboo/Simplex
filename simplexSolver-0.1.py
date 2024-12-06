@@ -1,18 +1,17 @@
 # Simplex Solver
-# By Howard Selden V, All Rights Reserved
+# By Howard Selden V, Josette Frazell
+# All Rights Reserved
 
 import numpy as np
 
 def simplex():
     # the objective function
-    objFunc = -np.array([20, 15, 50, 10, 19, 10, 4, 22]) #-np.array(eval(input("What are the coefficients of x in the objective function? Format as [1, 2, 3...]\n*They all should be positive\n")))
+    objFunc = -np.array([20, 15, 50, 10, 19, 10, 4, 22])
     
     # constraint matrix
     numVariables = objFunc.size
-    numConstraints = 8 #int(input("How many constraints are there?\n"))
+    numConstraints = 8 
     A = np.zeros((numConstraints, numVariables))
-    #for i in range(numConstraints):
-    #    A[i] = np.array(eval(input(f"What are the coefficients of x in row {i + 1}? Format as [1, 2, 3...]\n")))
     A[0] = [112, 74, 341, 128, 95, 32, 45, 250]
     A[1] = [22.5, 6.2, 22, 4.7, 8.8, 0.7, 0.8, 17.9]
     A[2] = [0, 0.1, 62, 12, 4.8, 4.9, 8.1, 0]
@@ -30,7 +29,7 @@ def simplex():
     zColumn = np.vstack(np.hstack([[1], np.zeros(numConstraints)]))
 
     # RHS column
-    rhsColumn = np.vstack([0, 3646, 319, 456, 101, 50, 2300, 0, 0]) #np.vstack(np.hstack([[0], eval(input("Going from top to bottom, what are the values of the right hand side? Format as [1, 2, 3...]\n*Excluding the objective function\n"))]))
+    rhsColumn = np.vstack([0, 3646, 319, 456, 101, 50, 2300, 0, 0]) 
 
     # RT column
     rtColumn = np.vstack(np.zeros(numConstraints + 1))
@@ -77,9 +76,6 @@ def simplex():
             updateDisplay()
             print(f"Number of arithmetic operations: {arith}\n",
                   f"Number of multiplications/divisions: {multdiv}")
-            # for row in range(8):
-                # if type(eval(bvColumn[row])) == "Variable":
-                    # print("yippee")
             
             # intellectual property of Josette Frazell      
             x1 = float(input('x1: '))
