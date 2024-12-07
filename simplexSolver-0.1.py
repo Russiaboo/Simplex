@@ -62,7 +62,7 @@ def simplex():
 
     # simplex function
     iteration = 0
-    while iteration < 100:
+    while True:
         iteration += 1
         
         # find lowest value and select that column
@@ -148,7 +148,7 @@ def simplex():
                     tableau [row, column] = int(np.round(tableau[row, column]))
                 print(bvColumn[row], " = ", tableau[row, -1])
                 print(f"row {row + 1}: ", list(tableau[row]))
-            repeat = input("Iterated 100 times. Would you like to continue? (y/n)")
+            repeat = input("Iterated 100 times. Would you like to continue to iterate? (y/n)")
             if repeat == "y":
                 iteration = 0
             else:
