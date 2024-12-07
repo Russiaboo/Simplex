@@ -6,7 +6,7 @@ import numpy as np
 
 def simplex():
     # the objective function
-    objFunc = -np.array([20, 15, 50, 10, 19, 10, 4, 22])
+    objFunc = -np.array([20, 15, 20.5, 10, 19, 10, 4, 22])
     
     # constraint matrix
     numVariables = objFunc.size
@@ -69,15 +69,16 @@ def simplex():
         minVal = 0.0
         minValColIn = 0
         for column in range(tableau.shape[1] - 1):
-            if tableau[0, column] < minVal:
+            if tableau[0, column] <= minVal:
                 minVal = tableau[0, column]
                 minValColIn = column           
         if minVal == 0.0:
             updateDisplay()
+            print(f"Number of iterations: {iteration - 1}")
             print(f"Number of arithmetic operations: {arith}\n",
                   f"Number of multiplications/divisions: {multdiv}")
-            
-            # intellectual property of Josette Frazell      
+            print("DONE")  
+
             x1 = float(input('x1: '))
             x2 = float(input('x2: '))
             x3 = float(input('x3: '))
@@ -100,9 +101,7 @@ def simplex():
                 f'Fat = {Fat}\n'+
                 f'Fiber = {Fiber}\n'+
                 f'Sodium = {Sodium}')
-            # intellectual property of Josette Frazell
             
-            print("DONE")
             break
         
         # ratio test and selct row
@@ -117,14 +116,14 @@ def simplex():
         minRatioRowIn = 0
         for row in range(tableau.shape[0] - 1):
             row += 1
-            if rtColumn[row] < minRatio:
+            if rtColumn[row] <= minRatio:
                 minRatio = rtColumn[row]
                 minRatioRowIn = row
-        pivotVar = tableau[minRatioRowIn, minValColIn]
+        pivotPosCo = tableau[minRatioRowIn, minValColIn]
 
         # normalize the row
         for column in range(tableau.shape[1]):
-            tableau[minRatioRowIn, column] = np.divide(tableau[minRatioRowIn, column], pivotVar)
+            tableau[minRatioRowIn, column] = np.divide(tableau[minRatioRowIn, column], pivotPosCo)
             multdiv += 1
             
         # EROs
@@ -142,13 +141,16 @@ def simplex():
 
         # output
         print(f"Iteration {iteration}:")
-        print("RT:\n", rtColumn)
         updateDisplay()
         if iteration == 100:
-            print("Iterated 100 times. Something is probably wrong.")
             for row in (range(tableau.shape[0])):
                 for column in (range(tableau.shape[1])):
                     tableau [row, column] = int(np.round(tableau[row, column]))
                 print(bvColumn[row], " = ", tableau[row, -1])
                 print(f"row {row + 1}: ", list(tableau[row]))
+            repeat = input("Iterated 100 times. Would you like to continue? (y/n)")
+            if repeat == "y":
+                iteration = 0
+            else:
+                break
 simplex()          
